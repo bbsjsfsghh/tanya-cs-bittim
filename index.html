@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Call Center Bittime</title>
+<style>
+  /* Style umum */
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #fff;
+    color: #202124;
+    scroll-behavior: smooth;
+  }
+  header img {
+    width: 100%;
+    max-height: 250px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 12px;
+  }
+  .verification {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #5f6368;
+    margin: 8px 0 12px 0;
+    gap: 6px;
+  }
+  .verification-icon {
+    width: 16px;
+    height: 16px;
+    fill: #1a73e8; /* Diubah ke biru */
+  }
+  h1 {
+    margin: 8px 0 16px 0;
+    font-weight: 400;
+  }
+  .btn-telepon {
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 24px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    box-shadow: 0 2px 6px rgb(26 115 232 / 0.6);
+    margin-bottom: 20px;
+  }
+  .btn-telepon:hover {
+    background-color: #155ab6;
+  }
+  .btn-icon {
+    width: 18px;
+    height: 18px;
+    fill: white;
+  }
+  nav {
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 100;
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 1px solid #dadce0;
+    padding: 12px 0;
+    font-size: 16px;
+    color: #5f6368;
+    box-shadow: 0 2px 5px rgb(0 0 0 / 0.05);
+  }
+  nav a {
+    cursor: pointer;
+    text-decoration: none;
+    color: #5f6368;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 24px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  nav a:hover,
+  nav a.active {
+    color: #1a73e8;
+    background-color: #e8f0fe;
+  }
+  .content-section {
+    margin-top: 20px;
+    max-width: 700px;
+  }
+  .content-box {
+    background-color: #f8f9fa;
+    padding: 16px 20px;
+    border-radius: 12px;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #3c4043;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
+  }
+  .content-box strong {
+    font-size: 18px;
+    display: block;
+    margin-bottom: 10px;
+  }
+  .content-box a {
+    color: #1a73e8;
+    text-decoration: none;
+  }
+  .content-box a:hover {
+    text-decoration: underline;
+  }
+  .icon-inline {
+    vertical-align: middle;
+    width: 16px;
+    height: 16px;
+    fill: #5f6368;
+    margin-right: 6px;
+  }
+  .map-container {
+    margin-top: 12px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
+    height: 300px;
+  }
+  iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  .location-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+    color: #3c4043;
+    margin-top: 15px;
+  }
+  .location-icon {
+    width: 18px;
+    height: 18px;
+    fill: #d93025;
+  }
+  .footer-telepon {
+    margin-top: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 20px;
+    border-radius: 24px;
+    border: 1px solid #1a73e8;
+    color: #1a73e8;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .footer-telepon:hover {
+    background-color: #e8f0fe;
+  }
+
+  /* Ikon Live Chat Mengambang */
+  .live-chat {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: #1a73e8;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgb(26 115 232 / 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: background-color 0.3s ease;
+  }
+  .live-chat:hover {
+    background: #155ab6;
+  }
+  .live-chat svg {
+    fill: white;
+    width: 28px;
+    height: 28px;
+  }
+
+  /* Footer Hak Cipta */
+  footer {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 12px;
+    color: #5f6368;
+    padding: 20px 0;
+    border-top: 1px solid #dadce0;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <img src="https://support.bittime.com/hc/theming_assets/01HZH0YXHRM4MHGWFAFHHFMVDM" alt="Pelita Air plane" />
+  <div class="verification" aria-label="Terverifikasi">
+    <svg class="verification-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
+    </svg>
+    <span>Terverifikasi</span>
+  </div>
+  <h1>Call Center Bittime</h1>
+  <a href="tel:0817-303-538" class="btn-telepon" aria-label="Telepon Call Center Pelita Air">
+    <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M6.62 10.79a15.093 15.093 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.11-.21 12.456 12.456 0 0 0 3.89.62 1 1 0 0 1 1 1v3.75a1 1 0 0 1-1 1A17.938 17.938 0 0 1 4 6a1 1 0 0 1 1-1h3.75a1 1 0 0 1 1 1 12.456 12.456 0 0 0 .62 3.89 1 1 0 0 1-.21 1.11z"/>
+    </svg>
+    Telepon
+  </a>
+</header>
+
+<nav>
+  <a href="#tentang" class="nav-link active">Tentang</a>
+  <a href="#hubungi" class="nav-link">Hubungi kami</a>
+  <a href="#lokasi" class="nav-link">Lokasi</a>
+</nav>
+
+<section class="content-section" aria-label="Informasi lengkap Call Center Pelita Air">
+
+  <div id="tentang" class="content-box">
+    <strong>Tentang</strong>
+    <p>24/7 Layanan Non-Stop: Kami memahami bahwa pasar kripto tidak pernah tidur. Oleh karena itu, layanan CS Live Chat kami tersedia 24 jam sehari, 7 hari seminggu.</p>
+    <p>
+      <svg class="icon-inline" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M6.62 10.79a15.093 15.093 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.11-.21 12.456 12.456 0 0 0 3.89.62 1 1 0 0 1 1 1v3.75a1 1 0 0 1-1 1A17.938 17.938 0 0 1 4 6a1 1 0 0 1 1-1h3.75a1 1 0 0 1 1 1 12.456 12.456 0 0 0 .62 3.89 1 1 0 0 1-.21 1.11z"/>
+      </svg>
+      Telepon: 0817-303-538
+    </p>
+  </div>
+
+  <div id="hubungi" class="content-box">
+    <strong>Hubungi kami</strong>
+    <p>
+      <svg class="icon-inline" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M6.62 10.79a15.093 15.093 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.11-.21 12.456 12.456 0 0 0 3.89.62 1 1 0 0 1 1 1v3.75a1 1 0 0 1-1 1A17.938 17.938 0 0 1 4 6a1 1 0 0 1 1-1h3.75a1 1 0 0 1 1 1 12.456 12.456 0 0 0 .62 3.89 1 1 0 0 1-.21 1.11z"/>
+      </svg>
+      <a href="tel:0817-303-538">Telepon: 0817-303-538</a>
+    </p>
+    <p>
+      <svg class="icon-inline whatsapp-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+        <polyline points="22,6 12,13 2,6"/>
+      </svg>
+      <a href="https://wa.me/62817303538?text=Halo%20CS%20Bittime">WhatsApp: 0817-303-538</a>
+    </p>
+    <p>
+      <svg class="icon-inline" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+        <polyline points="22,6 12,13 2,6"/>
+      </svg>
+      <a href="mailto:support@bittime.com">Email: support@bittime.com</a>
+    </p>
+  </div>
+
+  <div id="lokasi" class="content-box">
+    <strong>Lokasi</strong>
+    <div class="map-container" style="margin-top:12px;">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25392310.78219249!2d95.9203705772903!3d-2.0632925120195203!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e08bdaf26a75a9b%3A0x34e3af44d6f80d21!2sIndonesia!5e0!3m2!1sid!2sid!4v1687642900000!5m2!1sid!2sid"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        allowfullscreen>
+      </iframe>
+    </div>
+    <div class="location-label">
+      <svg class="location-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/>
+      </svg>
+      Indonesia
+      <a href="tel:0817-303-538" class="footer-telepon" aria-label="Telepon Call Center Pelita Air" style="margin-left: auto;">
+        <svg class="icon-inline" style="fill:#1a73e8; width: 18px; height:18px;" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M6.62 10.79a15.093 15.093 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.11-.21 12.456 12.456 0 0 0 3.89.62 1 1 0 0 1 1 1v3.75a1 1 0 0 1-1 1A17.938 17.938 0 0 1 4 6a1 1 0 0 1 1-1h3.75a1 1 0 0 1 1 1 12.456 12.456 0 0 0 .62 3.89 1 1 0 0 1-.21 1.11z"/>
+        </svg>
+        Telepon
+      </a>
+    </div>
+  </div>
+
+</section>
+
+<!-- Ikon Live Chat mengambang pojok kanan bawah -->
+<div class="live-chat" title="Live Chat" aria-label="Live Chat" role="button" tabindex="0" onclick="openLiveChat()" onkeypress="if(event.key==='Enter'){openLiveChat()}">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <path d="M20 2H4a2 2 0 0 0-2 2v18l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zM6 11h12v2H6zM6 7h12v2H6z"/>
+  </svg>
+</div>
+
+<footer>
+  © 2023 Bittime. All rights reserved.
+</footer>
+
+<script>
+  // Fungsi buka chat live - sesuaikan dengan integrasi chat Anda
+  function openLiveChat() {
+    alert('Fitur Live Chat belum terintegrasi. Silakan hubungi kami melalui telepon atau WhatsApp.');
+  }
+
+  // Aktifkan link navigasi yang sesuai dengan scroll
+  const sections = document.querySelectorAll('section .content-box');
+  const navLinks = document.querySelectorAll('nav a');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - 80;
+      if (pageYOffset >= sectionTop) {
+        current = section.getAttribute('id');
+      }
+    });
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === '#' + current) {
+        link.classList.add('active');
+      }
+    });
+  });
+</script>
+
+</body>
+      </html>
+      
